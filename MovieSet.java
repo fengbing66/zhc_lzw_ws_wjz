@@ -1,10 +1,29 @@
-package test;
+package movie_manager;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
+import java.util.ArrayList;
 
 public class MovieSet {
-	FileWriter fout=new FileWriter("D\\Movie.txt");//打开文本写
-	BufferedWriter bout =new BufferedWriter(fout);//字符流转换为缓冲流
-
+	MovieSet(){}
+	ArrayList<Movie>repository=new ArrayList<Movie>();
+	public boolean movieAdd(String name,String director,String actor,String screenTime,String showTime,String video_hall){
+		repository.add(new Movie(name,director,actor,screenTime,showTime,video_hall));
+		return true;
+	}
+	public boolean moveRemove(String name,String showTime){
+		for(Movie m:repository){
+			if(m.getName().equals(name)&&m.getShowTime().equals(showTime)){
+				m.show();
+				System.out.println("是否需要删除");
+				//此处添加事件捕捉。
+				//if(是)
+					repository.remove(m);
+					return true;
+			}
+			else{
+				System.out.println("没有该电影");
+			}
+		}
+		return false;
+	}
 }
+
